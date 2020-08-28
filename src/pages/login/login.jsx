@@ -8,6 +8,13 @@ class Login extends Component {
         super(props);
         this.state = {}
     }
+    onFinish = values => {
+        console.log('Success:', values);
+      };
+    
+    onFinishFailed = errorInfo => {
+    console.log('Failed:', errorInfo);
+    };
     render() {
         return (
             <div className="login">
@@ -20,12 +27,22 @@ class Login extends Component {
                     <Form
                         name="normal_login"
                         className="login-form"
+                        onFinish={this.onFinish}
+                        onFinishFailed={this.onFinishFailed}
                     >
                         <Form.Item
                             name="username"
-                            rules={[{ required: true, message: 'Please input your Username!' }]}
+                            rules={[
+                                { required: true,whitespace:true, message: 'Please input your Username!' },
+                                { min: 4, message: '用户名至少4位!' },
+                                { max: 12, message: '用户最多12位!' },
+                                { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名必须是英文数字和下划线组成!' }
+                            ]}
                         >
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                            <Input 
+                                prefix={<UserOutlined className="site-form-item-icon" />} 
+                                placeholder="Username" 
+                            />
                         </Form.Item>
                         <Form.Item
                             name="password"
