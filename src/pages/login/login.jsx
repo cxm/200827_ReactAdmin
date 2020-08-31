@@ -1,21 +1,43 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 import './login.less'
 import Logo from './images/logo.png'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button,message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import {reqLogin} from '../../api'
+import memoryUtils from '../../utils/memoryUtils.js'
+import storageUtils from '../../utils/storageUtils.js'
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
-    onFinish = values => {
-        console.log('Success:', values);
-      };
+    onFinish =async values => {
+        //提交登录ajax请求 
+        const {username,password}=values
+        const response=await reqLogin(username,password);
+        //console.log("成功:",response)
+        const result=response.data;
+        if(result.status===0){
+            message.success('登录成功')
+            //存储user到内存中
+            memoryUtils.user=result.data
+            storageUtils.saveUser(result.data)
+            //跳转
+            this.props.history.replace('/')
+        }else{
+            message.error(result.msg)
+        }
+    };
     
     onFinishFailed = errorInfo => {
-    console.log('Failed:', errorInfo);
+        console.log('Failed:', errorInfo);
     };
     render() {
+        const user=memoryUtils.user
+        if(user&&user._id){
+            return <Redirect to='/'/>
+        }
         return (
             <div className="login">
                 <header className="login-header">
