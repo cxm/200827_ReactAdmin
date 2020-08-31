@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import memoryUtils from '../../utils/memoryUtils.js'
 import {Redirect} from 'react-router-dom'
 import { Layout } from 'antd';
+import Header from '../../components/header'
+import LeftNav from '../../components/left-nav'
 
 class Admin extends Component {
     constructor(props) {
@@ -14,15 +16,17 @@ class Admin extends Component {
         if(!user._id){
             return <Redirect to='/login'/>
         }
-        const { Header, Footer, Sider, Content } = Layout;
+        const { Footer, Sider, Content } = Layout;
         return (
-            <Layout>
-                <Header>Header</Header>
+            <Layout style={{height:'100%'}}>
+                <Sider>
+                    <LeftNav/>
+                </Sider>
                 <Layout>
-                    <Sider>Sider</Sider>
-                    <Content>Content</Content>
+                    <Header/>
+                    <Content style={{backgroundColor:'#fff'}}>Content</Content>
+                    <Footer style={{textAlign:'center'}}>Footer</Footer>
                 </Layout>
-                <Footer>Footer</Footer>
             </Layout>
         );
     }
