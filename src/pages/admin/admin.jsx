@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import memoryUtils from '../../utils/memoryUtils.js'
-import {Redirect} from 'react-router-dom'
+import {Redirect,Switch,Route} from 'react-router-dom'
 import { Layout } from 'antd';
 import Header from '../../components/header'
 import LeftNav from '../../components/left-nav'
+import Home from '../../pages/home/home'
+import Category from '../../pages/category/category'
+import Product from '../../pages/product/product'
+import Role from '../../pages/role/role'
+import User from '../../pages/user/user'
+import Bar from '../../pages/charts/bar'
+import Line from '../../pages/charts/line'
+import Pie from '../../pages/charts/pie'
 
 class Admin extends Component {
     constructor(props) {
@@ -12,7 +20,7 @@ class Admin extends Component {
     }
     render() {
         const user=memoryUtils.user
-        console.log('user:',user)
+        //console.log('user:',user)
         if(!user._id){
             return <Redirect to='/login'/>
         }
@@ -24,8 +32,20 @@ class Admin extends Component {
                 </Sider>
                 <Layout>
                     <Header/>
-                    <Content style={{backgroundColor:'#fff'}}>Content</Content>
-                    <Footer style={{textAlign:'center'}}>Footer</Footer>
+                    <Content style={{margin:'20px',backgroundColor:'#fff'}}>
+                        <Switch>
+                            <Route path="/category" component={Category}></Route>
+                            <Route path="/product" component={Product}></Route>
+                            <Route path="/home" component={Home}></Route>
+                            <Route path="/role" component={Role}></Route>
+                            <Route path="/user" component={User}></Route>
+                            <Route path="/charts/bar" component={Bar}></Route>
+                            <Route path="/charts/line" component={Line}></Route>
+                            <Route path="/charts/pie" component={Pie}></Route>
+                            <Redirect to="/home"></Redirect>
+                        </Switch>
+                    </Content>
+                    <Footer style={{textAlign:'center'}}>推荐使用谷歌浏览器，可以获得更佳体验</Footer>
                 </Layout>
             </Layout>
         );
