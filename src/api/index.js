@@ -2,7 +2,8 @@ import ajax from './ajax.js'
 import jsonp from 'jsonp'
 import {message} from 'antd'
 
-export const reqLogin=(username,password)=>ajax("http://39.100.225.255:5000/login",{username,password},"POST")
+const BASE='http://39.100.225.255:5000'
+export const reqLogin=(username,password)=>ajax(BASE+"/login",{username,password},"POST")
 
 //添加用户
 export const reqAddUse=(user)=>ajax("manage/user/add",user,"POST")
@@ -24,3 +25,12 @@ export const reqWeather=(city)=>{
 }
 
 //reqWeather('太原')
+
+//查看分类
+export const reqGetCategorys=(parentId)=>ajax(BASE+'/manage/category/list',{parentId})
+
+//添加分类
+export const reqAddCategory=({categoryName,parentId})=>ajax(BASE+'/manage/category/add',{categoryName,parentId},'POST')
+
+//修改分类名称
+export const reqUpdateCategory=({categoryId,categoryName})=>ajax(BASE+'/manage/category/update',{categoryId,categoryName},'POST')
