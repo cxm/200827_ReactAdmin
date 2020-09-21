@@ -8,6 +8,8 @@ import {Modal} from 'antd'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import {withRouter} from 'react-router-dom'
 import menuList from '../../config/menuConfig.js'
+import ButtonLink from '../button-link'
+
 class Header extends Component {
     state={
         currentTime:formateDate(Date.now()),
@@ -65,7 +67,7 @@ class Header extends Component {
             <div className="header">
                 <div className="header-top">
                     <span>欢迎，{username}</span>
-                    <a href="javascript:" onClick={this.logout}>退出</a>
+                    <ButtonLink onClick={this.logout}>退出</ButtonLink>
                 </div>
                 <div className="header-bottom">
                     <div className="header-bottom-left">
