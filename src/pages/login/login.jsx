@@ -58,7 +58,7 @@ class Login extends Component {
                                 { required: true,whitespace:true, message: 'Please input your Username!' },
                                 { min: 4, message: '用户名至少4位!' },
                                 { max: 12, message: '用户最多12位!' },
-                                { pattern: /^[a-zA-Z0-9_]+$/, message: '用户名必须是英文数字和下划线组成!' }
+                                
                             ]}
                         >
                             <Input 
