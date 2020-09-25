@@ -150,6 +150,7 @@ export class Category extends Component {
                         dataSource={parentId==='0'?categorys:subCategorys} 
                         columns={this.columns} 
                         bordered
+                        rowKey={record => record._id}
                         pagination={{pageSize:5}}
                     />
                 </Card>
